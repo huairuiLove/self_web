@@ -1,6 +1,6 @@
 # Plan-and-Solve：先做计划，能减少零样本推理的漏步吗
 
-> 论文笔记：[Plan-and-Solve Prompting: Improving Zero-Shot Chain-of-Thought Reasoning](/papers/plan-and-solve)，Wang et al.，2023。
+> 论文笔记：[Plan-and-Solve Prompting: Improving Zero-Shot Chain-of-Thought Reasoning](https://arxiv.org/abs/2305.04091)，Wang et al.，2023。
 
 ## 从 Zero-shot CoT 到显式计划
 

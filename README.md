@@ -56,30 +56,10 @@ npm run preview
 | 目录 | 作用 |
 | ---- | ---- |
 | `content/raw/ai-agent-interview/` | 面试指南原稿与 39 篇 arXiv PDF 原始资料 |
-| `content/raw/active-learning/` | 主动学习阅读顺序与 22 篇本地 PDF |
 | `content/posts/ai-agent-interview/` | 已整理成网站经验贴的 Markdown |
 | `src/data/papers.ts` | 论文库索引、分类、摘要与原文链接 |
 
-### PyTorch 方法字典
-
-`function_search/` 是桌面版 API 查询工具，网站通过 `/function-search` 提供同一份站内查询入口。目前导出了 6,164 个 PyTorch API，以及 Python 常用、后端和扩展条目，共 6,235 条；索引文件位于 `public/function-search.json`，按页面访问时才加载，不影响首页首屏。更新桌面版索引后，可以重新导出：
-
-```bash
-cd function_search
-PYTHONPATH=src ./.venv/bin/python -m function_search.build_index \
-  --output /tmp/function-search.db \
-  --export-json ../public/function-search.json
-```
-
-网站新增 `/papers` 论文库，论文详情页内置 PDF 阅读、缩放和划词翻译。Agent 与主动学习两组共 61 篇 PDF 保存在原始资料目录，Vite 构建时自动复制到 `dist/papers/` 并通过同源 `/papers/{文件名}` 提供，不会再触发浏览器跨域请求；没有本地 PDF 的产品文章或出版物仍保留外部入口。
-
-### PDF 选区翻译
-
-论文库的 PDF 详情页内置阅读翻译模块。先在 LM Studio 中加载模型并启动 Local Server（默认 `http://localhost:1234`），再填写模型名称并测试接口。当前默认模型为 `qwen/qwen3-4b-2507`，请求关闭 thinking，适合短词即时查译；开发环境对默认本地地址使用 Vite 同源代理，避免 LM Studio 不处理 `OPTIONS` 预检导致请求失败；生产环境直连本地 LM Studio 时，需要在 Local Server 设置中开启 CORS，或部署自己的服务端代理。阅读器使用 PDF.js 官方 Viewer 渲染连续页面、缩放和文字层，保持 PDF 原生排版清晰度；在论文详情页像 Edge/Safari 一样拖选文字，松开鼠标后会自动调用本地模型并显示中文译文，无需画框或手动触发 OCR。PDF 只在浏览器内处理；接口配置保存在当前浏览器的 localStorage。
-
-论文详情页的“智能划词阅读”直接加载同源本地 PDF；如果部署时没有上传 `dist/papers/`，页面会提示通过“打开 PDF”载入本地文件。自动翻译依赖 PDF 自带的文字层，扫描版 PDF 没有可选择文本时需要先执行 OCR。若浏览器无法连接 LM Studio，检查 Local Server 是否启动、端口是否正确，以及 LM Studio 的 CORS 是否允许当前网站地址。
-
-成功译文会写入浏览器本地查词历史，按模型和翻译模式去重，最多保留 60 条；重复选择相同内容会直接命中缓存。历史记录不会被拼接进模型消息。每次 LM Studio 请求都是独立的 `system + 当前选中文字`，因此上下文不会随阅读时间持续增长，也不依赖模型自动压缩上下文。
+网站新增 `/papers` 论文库，论文详情页提供原文 PDF 阅读入口；由于 PDF 原始资料约 272MB，不会复制进前端 bundle，生产环境通过 arXiv 在线阅读。指南中的 Devin 是产品文章，因此保留为外部链接，不伪造本地论文文件。
 
 ## 部署
 

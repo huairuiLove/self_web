@@ -7,17 +7,11 @@ import { useSiteTheme } from '../composables/useSiteTheme'
 
 const route = useRoute()
 const isHome = computed(() => route.name === 'home')
-const { activeTheme } = useSiteTheme()
+const { activeImage, activeImageFit } = useSiteTheme()
 </script>
 
 <template>
-  <div
-    class="site-shell"
-    :style="{
-      '--character-bg': `url(${activeTheme.image})`,
-      '--character-position': activeTheme.backgroundPosition,
-    }"
-  >
+  <div class="site-shell" :style="{ '--character-bg': `url(${activeImage})`, '--character-size': activeImageFit }">
     <div class="site-grid" aria-hidden="true" />
     <SiteHeader />
     <main class="site-main" :class="{ 'site-main--home': isHome }">
@@ -48,8 +42,9 @@ const { activeTheme } = useSiteTheme()
   inset: 0;
   z-index: -2;
   background-image: var(--character-bg);
-  background-position: var(--character-position, center);
-  background-size: cover;
+  background-position: center;
+  background-size: var(--character-size, cover);
+  background-repeat: no-repeat;
   opacity: 0.5;
   filter: saturate(1.05) contrast(1.02);
   mask-image: linear-gradient(90deg, transparent 0%, black 34%, black 100%);

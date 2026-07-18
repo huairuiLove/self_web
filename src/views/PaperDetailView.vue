@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from 'vue'
+import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { getPaperBySlug, getPaperPdfUrl, getPaperUrl } from '../data/papers'
-
-const PdfTranslateView = defineAsyncComponent(() => import('./PdfTranslateView.vue'))
 
 const route = useRoute()
 const paper = computed(() => getPaperBySlug(route.params.slug as string))
@@ -17,39 +15,17 @@ const pdfUrl = computed(() => (paper.value ? getPaperPdfUrl(paper.value) : undef
       <p class="meta">{{ paper.category }} · {{ paper.year }}</p>
       <h1 class="title">{{ paper.title }}</h1>
       <p v-if="paper.authors" class="authors">{{ paper.authors }}</p>
-      <p v-if="paper.venue" class="venue">{{ paper.venue }}</p>
       <p class="summary">{{ paper.contribution }}</p>
-      <div class="detail-actions">
-        <a v-if="paper.externalUrl" :href="getPaperUrl(paper)" class="source-link" target="_blank" rel="noopener noreferrer">
-          阅读原文
-        </a>
-      </div>
+      <a :href="getPaperUrl(paper)" class="source-link" target="_blank" rel="noopener noreferrer">
+        打开原文 ↗
+      </a>
     </header>
 
-    <section v-if="paper.readingGoal" class="reading-guide" aria-labelledby="reading-guide-title">
-      <div class="guide-heading">
-        <p class="guide-kicker">READING NOTES</p>
-        <h2 id="reading-guide-title" class="guide-title">给自己的阅读提醒</h2>
-      </div>
-      <dl class="guide-list">
-        <div class="guide-item">
-          <dt>这次读什么</dt>
-          <dd>{{ paper.readingGoal }}</dd>
-        </div>
-        <div v-if="paper.keyIdea" class="guide-item">
-          <dt>抓住的主线</dt>
-          <dd>{{ paper.keyIdea }}</dd>
-        </div>
-        <div v-if="paper.watchFor" class="guide-item">
-          <dt>不要直接相信</dt>
-          <dd>{{ paper.watchFor }}</dd>
-        </div>
-      </dl>
-    </section>
-
-    <PdfTranslateView v-if="pdfUrl" embedded :paper="paper" />
+    <div v-if="pdfUrl" class="pdf-shell">
+      <iframe :src="pdfUrl" :title="`${paper.title} PDF`" loading="lazy" />
+    </div>
     <div v-else class="external-note">
-      <p>这篇资料暂未保存在站内，阅读入口指向作者页面、出版方或 arXiv。</p>
+      <p>这是一篇产品文章，不是 PDF 论文，已保留原文入口。</p>
       <a :href="getPaperUrl(paper)" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>
     </div>
   </div>
@@ -67,24 +43,11 @@ const pdfUrl = computed(() => (paper.value ? getPaperPdfUrl(paper.value) : undef
 .meta { margin: 0 0 0.55rem; color: var(--accent-pink); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; }
 .title { margin: 0 0 0.65rem; font-family: var(--font-display); font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.25; }
 .authors { margin: 0 0 0.6rem; color: var(--text-muted); font-size: 0.85rem; }
-.venue { margin: -0.25rem 0 0.7rem; color: var(--accent-strong); font-size: 0.8rem; }
 .summary { max-width: 46rem; margin: 0 0 1rem; color: var(--text-secondary); line-height: 1.8; }
-.detail-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
-.source-link { display: inline-flex; color: var(--text-muted); font-size: 0.82rem; text-decoration: none; }
-.source-link:hover { color: var(--accent-pink); }
-.reading-guide { display: grid; grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); margin: 2rem 0; padding: 1.5rem 0; border-top: 1px solid var(--border-strong); border-bottom: 1px solid var(--border-strong); }
-.guide-kicker { margin: 0 0 0.45rem; color: var(--accent-pink); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; }
-.guide-title { margin: 0; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; }
-.guide-list { display: grid; gap: 1rem; margin: 0; }
-.guide-item { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 1rem; }
-.guide-item dt { color: var(--accent-strong); font-size: 0.78rem; font-weight: 700; }
-.guide-item dd { margin: 0; color: var(--text-secondary); font-size: 0.88rem; line-height: 1.75; }
+.source-link { display: inline-flex; color: var(--accent-strong); font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+.pdf-shell { overflow: hidden; min-height: 78vh; border: 1px solid var(--border-subtle); border-radius: 12px; background: #dbe7f7; box-shadow: 0 18px 45px rgba(55,89,144,0.12); }
+.pdf-shell iframe { display: block; width: 100%; height: 78vh; border: 0; background: white; }
 .external-note { padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 12px; background: var(--surface-card); color: var(--text-secondary); }
 .external-note a, .empty a { color: var(--accent-strong); }
 .empty { padding: 4rem 1rem; color: var(--text-muted); text-align: center; }
-
-@media (max-width: 640px) {
-  .reading-guide { grid-template-columns: 1fr; gap: 1.25rem; }
-  .guide-item { grid-template-columns: 1fr; gap: 0.25rem; }
-}
 </style>

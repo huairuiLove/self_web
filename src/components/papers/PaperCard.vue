@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import type { ResearchPaper } from '../../data/papers'
+import type { AgentPaper } from '../../data/papers'
 
-defineProps<{ paper: ResearchPaper }>()
+defineProps<{ paper: AgentPaper }>()
 </script>
 
 <template>
@@ -15,14 +15,20 @@ defineProps<{ paper: ResearchPaper }>()
       <RouterLink :to="`/papers/${paper.slug}`">{{ paper.title }}</RouterLink>
     </h2>
     <p v-if="paper.authors" class="paper-authors">{{ paper.authors }}</p>
-    <p v-if="paper.venue" class="paper-venue">{{ paper.venue }}</p>
     <p class="paper-contribution">{{ paper.contribution }}</p>
     <div class="paper-actions">
-      <RouterLink :to="`/papers/${paper.slug}`" class="paper-detail">
-        站内查看 <span aria-hidden="true">↗</span>
-      </RouterLink>
+      <RouterLink :to="`/papers/${paper.slug}`" class="paper-detail">站内查看 <span aria-hidden="true">↗</span></RouterLink>
       <a
-        v-if="paper.externalUrl"
+        v-if="paper.arxivId"
+        :href="`https://arxiv.org/abs/${paper.arxivId}`"
+        class="paper-source"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        arXiv
+      </a>
+      <a
+        v-else-if="paper.externalUrl"
         :href="paper.externalUrl"
         class="paper-source"
         target="_blank"
@@ -44,7 +50,6 @@ defineProps<{ paper: ResearchPaper }>()
 .paper-title a { color: var(--text-primary); text-decoration: none; }
 .paper-title a:hover { color: var(--accent-strong); }
 .paper-authors { margin: 0 0 0.65rem; color: var(--text-muted); font-size: 0.78rem; }
-.paper-venue { margin: -0.35rem 0 0.65rem; color: var(--accent-strong); font-size: 0.72rem; }
 .paper-contribution { flex: 1; margin: 0; color: var(--text-secondary); font-size: 0.88rem; line-height: 1.65; }
 .paper-actions { display: flex; align-items: center; gap: 1rem; margin-top: 1.1rem; }
 .paper-detail { color: var(--accent-strong); font-size: 0.82rem; font-weight: 700; text-decoration: none; }

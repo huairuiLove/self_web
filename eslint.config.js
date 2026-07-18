@@ -6,14 +6,7 @@ import vue from 'eslint-plugin-vue'
 
 export default tseslint.config(
   {
-    ignores: [
-      'dist/**',
-      'node_modules/**',
-      'function_search/.venv/**',
-      'function_search/dist/**',
-      'function_search/build/**',
-      'function_search/.pytest_cache/**',
-    ],
+    ignores: ['dist/**', 'node_modules/**'],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,

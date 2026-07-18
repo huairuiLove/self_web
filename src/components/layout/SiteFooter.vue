@@ -4,7 +4,7 @@ import { profile } from '../../data/profile'
 
 <template>
   <footer class="footer">
-    <p class="footer-copy"><span class="footer-kicker">MH / 01</span> © {{ new Date().getFullYear() }} {{ profile.englishName }}</p>
+    <p class="footer-copy"><span class="footer-kicker">FJ / 04</span> © {{ new Date().getFullYear() }} {{ profile.englishName }}</p>
     <div class="footer-links">
       <a
         v-for="link in profile.links"

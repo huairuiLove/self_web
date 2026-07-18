@@ -53,7 +53,7 @@ Agent 可能同时处理文本、图像、结构化数据和环境反馈。感�
 
 ## 相关论文
 
-- [ReAct: Synergizing Reasoning and Acting in Language Models](/papers/react)
-- [Plan-and-Solve Prompting](/papers/plan-and-solve)
-- [A Survey on Large Language Model based Autonomous Agents](/papers/autonomous-agents-survey)
-- [The Agent Security Bench](/papers/agent-security-bench)
+- [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
+- [Plan-and-Solve Prompting](https://arxiv.org/abs/2305.04091)
+- [A Survey on Large Language Model based Autonomous Agents](https://arxiv.org/abs/2308.11432)
+- [The Agent Security Bench](https://arxiv.org/abs/2406.16585)

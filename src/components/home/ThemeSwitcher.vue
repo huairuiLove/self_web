@@ -2,7 +2,7 @@
 import { useSiteTheme } from '../../composables/useSiteTheme'
 import type { VisualThemeName } from '../../data/themes'
 
-const { theme, themes, setTheme } = useSiteTheme()
+const { theme, themes, setTheme, hasMultipleImages, nextImage, previousImage } = useSiteTheme()
 
 function chooseTheme(name: VisualThemeName) {
   setTheme(name)
@@ -28,6 +28,11 @@ function chooseTheme(name: VisualThemeName) {
           <small>{{ item.subtitle }}</small>
         </span>
       </button>
+    </div>
+    <div v-if="hasMultipleImages" class="slideshow-controls" role="group" aria-label="切换背景图片">
+      <button type="button" title="上一张背景" aria-label="上一张背景" @click="previousImage">←</button>
+      <span>手动切换背景</span>
+      <button type="button" title="下一张背景" aria-label="下一张背景" @click="nextImage">→</button>
     </div>
   </div>
 </template>
@@ -56,6 +61,10 @@ function chooseTheme(name: VisualThemeName) {
 .theme-option strong, .theme-option small { display: block; }
 .theme-option strong { color: var(--text-primary); font-size: 0.8rem; font-weight: 700; }
 .theme-option small { margin-top: 0.08rem; color: var(--text-muted); font-size: 0.66rem; }
+.slideshow-controls { display: inline-flex; width: fit-content; align-items: center; gap: 0.5rem; padding: 0.3rem; border: 1px solid var(--border-subtle); border-radius: 6px; background: rgba(255, 255, 255, 0.7); }
+.slideshow-controls button { display: grid; width: 32px; height: 32px; place-items: center; padding: 0; border: 0; border-radius: 4px; color: var(--text-primary); background: var(--surface-elevated); cursor: pointer; font-size: 1rem; transition: color 0.2s ease, background 0.2s ease; }
+.slideshow-controls button:hover { color: var(--bg-base); background: var(--accent); }
+.slideshow-controls span { color: var(--text-muted); font-size: 0.7rem; }
 
 @media (max-width: 480px) {
   .theme-option { flex: 1; min-width: 0; }

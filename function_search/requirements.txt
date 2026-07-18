@@ -1,5 +1,0 @@
-rapidfuzz>=3.6.0
-customtkinter>=5.2.0
-
-# Build-time only (index generation + Mac packaging)
-# pip install -r requirements-build.txt

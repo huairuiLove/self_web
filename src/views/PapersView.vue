@@ -8,15 +8,14 @@ const categories = ['全部', ...Array.from(new Set(papers.map((paper) => paper.
 const visiblePapers = computed(() => selectedCategory.value === '全部'
   ? papers
   : papers.filter((paper) => paper.category === selectedCategory.value))
-const activeLearningCount = papers.filter((paper) => paper.category.startsWith('主动学习')).length
 </script>
 
 <template>
   <div class="page">
     <header class="page-header">
       <p class="page-kicker">READING ROOM / 03</p>
-      <h1 class="page-title">研究论文库</h1>
-      <p class="page-lead">保留 Agent 学习资料，并新增 {{ activeLearningCount }} 篇主动学习阅读条目。基础线用来搭建方法框架，医学线用来校准真实标注成本、数据划分与临床工作流。</p>
+      <h1 class="page-title">Agent 论文库</h1>
+      <p class="page-lead">从面试指南整理出的 40 个学习条目。论文保存在原始资料目录，站内提供摘要、分类和原文阅读入口。</p>
     </header>
 
     <div class="filters" role="group" aria-label="论文分类">

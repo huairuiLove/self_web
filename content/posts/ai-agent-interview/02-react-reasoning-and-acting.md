@@ -1,6 +1,6 @@
 # ReAct：为什么 Agent 要把推理和行动交替起来
 
-> 论文笔记：[ReAct: Synergizing Reasoning and Acting in Language Models](/papers/react)，Yao et al.，ICLR 2023。
+> 论文笔记：[ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)，Yao et al.，ICLR 2023。
 
 ## 它解决了什么问题
 
