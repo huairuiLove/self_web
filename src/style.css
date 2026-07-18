@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Noto+Serif+SC:wght@500;600;700&display=swap');
+
+:root {
+  --bg-base: #f7f9ff;
+  --bg-deep: #edf3ff;
+  --text-primary: #17223c;
+  --text-secondary: #46526f;
+  --text-muted: #78839f;
+  --accent: #2f82d9;
+  --accent-strong: #2169bc;
+  --accent-pink: #ce5fa2;
+  --accent-yellow: #b77a16;
+  --surface-card: rgba(255, 255, 255, 0.82);
+  --surface-elevated: #eef4ff;
+  --surface-hover: #e5efff;
+  --border-subtle: rgba(51, 91, 150, 0.17);
+  --border-strong: rgba(51, 91, 150, 0.33);
+  --radius-lg: 16px;
+  --shadow-card: 0 18px 50px rgba(0, 0, 0, 0.34);
+  --font-display: 'Noto Serif SC', 'Songti SC', serif;
+  --font-body: 'DM Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#app { min-height: 100vh; }
+a { color: inherit; }
+img { display: block; max-width: 100%; height: auto; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+::selection { background: #f4c4e0; color: var(--text-primary); }

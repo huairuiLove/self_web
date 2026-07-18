@@ -1,0 +1,12 @@
+[
+  {
+    "name": "my_helper",
+    "full_name": "mylib.my_helper",
+    "module": "mylib",
+    "category": "function",
+    "signature": "my_helper(value: str) -> str",
+    "description": "示例扩展函数，演示如何添加自定义查询数据。",
+    "example": "from mylib import my_helper\nresult = my_helper('demo')",
+    "tags": ["extension", "demo"]
+  }
+]

@@ -1,0 +1,302 @@
+[
+  {
+    "name": "FastAPI",
+    "full_name": "fastapi.FastAPI",
+    "module": "fastapi",
+    "category": "class",
+    "signature": "FastAPI(**extra)",
+    "description": "高性能异步 Web 框架入口，自动生成 OpenAPI 文档。",
+    "example": "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get('/health')\ndef health():\n    return {'status': 'ok'}",
+    "tags": ["fastapi", "web", "api", "async"]
+  },
+  {
+    "name": "APIRouter",
+    "full_name": "fastapi.APIRouter",
+    "module": "fastapi",
+    "category": "class",
+    "signature": "APIRouter(prefix='', tags=None)",
+    "description": "模块化路由分组，便于拆分大型后端项目。",
+    "example": "router = APIRouter(prefix='/users', tags=['users'])\n\n@router.get('/')\ndef list_users():\n    return []",
+    "tags": ["fastapi", "router", "api"]
+  },
+  {
+    "name": "Depends",
+    "full_name": "fastapi.Depends",
+    "module": "fastapi",
+    "category": "function",
+    "signature": "Depends(dependency=None, *, use_cache=True)",
+    "description": "声明依赖注入，用于数据库会话、鉴权、配置等复用逻辑。",
+    "example": "def get_db():\n    db = SessionLocal()\n    try:\n        yield db\n    finally:\n        db.close()\n\n@app.get('/items')\ndef read_items(db: Session = Depends(get_db)):\n    ...",
+    "tags": ["fastapi", "dependency-injection"]
+  },
+  {
+    "name": "HTTPException",
+    "full_name": "fastapi.HTTPException",
+    "module": "fastapi",
+    "category": "class",
+    "signature": "HTTPException(status_code, detail=None)",
+    "description": "抛出标准 HTTP 错误响应。",
+    "example": "if not user:\n    raise HTTPException(status_code=404, detail='User not found')",
+    "tags": ["fastapi", "error", "http"]
+  },
+  {
+    "name": "BaseModel",
+    "full_name": "pydantic.BaseModel",
+    "module": "pydantic",
+    "category": "class",
+    "signature": "class BaseModel",
+    "description": "数据校验与序列化基类，FastAPI 请求/响应模型核心。",
+    "example": "class UserCreate(BaseModel):\n    email: EmailStr\n    password: str\n    age: int | None = None",
+    "tags": ["pydantic", "validation", "schema"]
+  },
+  {
+    "name": "Field",
+    "full_name": "pydantic.Field",
+    "module": "pydantic",
+    "category": "function",
+    "signature": "Field(default=..., *, alias=None, ge=None, le=None)",
+    "description": "为模型字段添加约束、默认值与文档元数据。",
+    "example": "price: float = Field(gt=0, description='Unit price in CNY')",
+    "tags": ["pydantic", "validation"]
+  },
+  {
+    "name": "create_engine",
+    "full_name": "sqlalchemy.create_engine",
+    "module": "sqlalchemy",
+    "category": "function",
+    "signature": "create_engine(url, **kwargs)",
+    "description": "创建 SQLAlchemy 数据库引擎，管理连接池。",
+    "example": "engine = create_engine('postgresql+psycopg://user:pass@localhost/app', pool_pre_ping=True)",
+    "tags": ["sqlalchemy", "database", "orm"]
+  },
+  {
+    "name": "sessionmaker",
+    "full_name": "sqlalchemy.orm.sessionmaker",
+    "module": "sqlalchemy.orm",
+    "category": "function",
+    "signature": "sessionmaker(bind=None, autoflush=True, autocommit=False)",
+    "description": "Session 工厂，用于请求级数据库事务管理。",
+    "example": "SessionLocal = sessionmaker(bind=engine, autoflush=False)\nwith SessionLocal() as db:\n    db.add(user)\n    db.commit()",
+    "tags": ["sqlalchemy", "database", "session"]
+  },
+  {
+    "name": "declarative_base",
+    "full_name": "sqlalchemy.orm.declarative_base",
+    "module": "sqlalchemy.orm",
+    "category": "function",
+    "signature": "declarative_base()",
+    "description": "创建 ORM 模型基类，映射数据库表。",
+    "example": "Base = declarative_base()\n\nclass User(Base):\n    __tablename__ = 'users'\n    id = Column(Integer, primary_key=True)",
+    "tags": ["sqlalchemy", "orm", "model"]
+  },
+  {
+    "name": "select",
+    "full_name": "sqlalchemy.select",
+    "module": "sqlalchemy",
+    "category": "function",
+    "signature": "select(*entities)",
+    "description": "SQLAlchemy 2.0 风格查询构造器。",
+    "example": "stmt = select(User).where(User.active.is_(True)).limit(20)\nusers = session.execute(stmt).scalars().all()",
+    "tags": ["sqlalchemy", "query", "orm"]
+  },
+  {
+    "name": "celery.Celery",
+    "full_name": "celery.Celery",
+    "module": "celery",
+    "category": "class",
+    "signature": "Celery(main=None, broker=None, backend=None)",
+    "description": "分布式任务队列，处理异步耗时任务。",
+    "example": "app = Celery('tasks', broker='redis://localhost:6379/0')\n\n@app.task\ndef send_email(to: str):\n    ...",
+    "tags": ["celery", "queue", "async", "task"]
+  },
+  {
+    "name": "Redis",
+    "full_name": "redis.Redis",
+    "module": "redis",
+    "category": "class",
+    "signature": "Redis(host='localhost', port=6379, db=0)",
+    "description": "Redis 客户端，用于缓存、分布式锁、消息等。",
+    "example": "r = Redis.from_url('redis://localhost:6379/0')\nr.setex('token:1', 3600, 'abc')\nvalue = r.get('token:1')",
+    "tags": ["redis", "cache", "kv"]
+  },
+  {
+    "name": "requests.get",
+    "full_name": "requests.get",
+    "module": "requests",
+    "category": "function",
+    "signature": "requests.get(url, params=None, timeout=None, headers=None)",
+    "description": "发送 HTTP GET 请求，后端服务间调用常用。",
+    "example": "resp = requests.get('https://api.example.com/users', timeout=5)\nresp.raise_for_status()\ndata = resp.json()",
+    "tags": ["requests", "http", "client"]
+  },
+  {
+    "name": "httpx.AsyncClient",
+    "full_name": "httpx.AsyncClient",
+    "module": "httpx",
+    "category": "class",
+    "signature": "AsyncClient(*, base_url=None, timeout=None)",
+    "description": "异步 HTTP 客户端，适合 FastAPI 生态并发外部调用。",
+    "example": "async with httpx.AsyncClient(timeout=10) as client:\n    resp = await client.get('https://api.example.com/ping')",
+    "tags": ["httpx", "http", "async", "client"]
+  },
+  {
+    "name": "uvicorn.run",
+    "full_name": "uvicorn.run",
+    "module": "uvicorn",
+    "category": "function",
+    "signature": "uvicorn.run(app, host='127.0.0.1', port=8000, reload=False)",
+    "description": "启动 ASGI 服务（FastAPI/Starlette）。",
+    "example": "if __name__ == '__main__':\n    uvicorn.run('app.main:app', host='0.0.0.0', port=8000, reload=True)",
+    "tags": ["uvicorn", "asgi", "server"]
+  },
+  {
+    "name": "JWT.encode",
+    "full_name": "jwt.encode",
+    "module": "jwt",
+    "category": "function",
+    "signature": "jwt.encode(payload, key, algorithm='HS256')",
+    "description": "生成 JWT 令牌，常用于无状态鉴权。",
+    "example": "token = jwt.encode({'sub': user_id, 'exp': exp}, SECRET, algorithm='HS256')",
+    "tags": ["jwt", "auth", "security"]
+  },
+  {
+    "name": "passlib.hash.bcrypt",
+    "full_name": "passlib.hash.bcrypt",
+    "module": "passlib.hash",
+    "category": "module",
+    "signature": "bcrypt.hash(password) / bcrypt.verify(password, hash)",
+    "description": "bcrypt 密码哈希与校验，避免明文存储密码。",
+    "example": "hashed = bcrypt.hash('plain-password')\nbcrypt.verify('plain-password', hashed)",
+    "tags": ["passlib", "bcrypt", "auth", "security"]
+  },
+  {
+    "name": "alembic.command.upgrade",
+    "full_name": "alembic.command.upgrade",
+    "module": "alembic.command",
+    "category": "function",
+    "signature": "upgrade(config, revision)",
+    "description": "执行数据库迁移到指定版本，生产部署必备。",
+    "example": "alembic.command.upgrade(config, 'head')",
+    "tags": ["alembic", "migration", "database"]
+  },
+  {
+    "name": "pytest.fixture",
+    "full_name": "pytest.fixture",
+    "module": "pytest",
+    "category": "function",
+    "signature": "@pytest.fixture(scope='function')",
+    "description": "定义测试夹具，为 API/服务测试注入依赖。",
+    "example": "@pytest.fixture\ndef client():\n    with TestClient(app) as c:\n        yield c",
+    "tags": ["pytest", "testing", "fixture"]
+  },
+  {
+    "name": "TestClient",
+    "full_name": "starlette.testclient.TestClient",
+    "module": "starlette.testclient",
+    "category": "class",
+    "signature": "TestClient(app)",
+    "description": "无需启动真实端口即可测试 FastAPI/Starlette 应用。",
+    "example": "client = TestClient(app)\nresp = client.post('/login', json={'email': 'a@b.com', 'password': 'x'})",
+    "tags": ["starlette", "testing", "fastapi"]
+  },
+  {
+    "name": "BackgroundTasks",
+    "full_name": "fastapi.BackgroundTasks",
+    "module": "fastapi",
+    "category": "class",
+    "signature": "BackgroundTasks()",
+    "description": "在响应返回后执行轻量后台任务（邮件、日志等）。",
+    "example": "def write_log(msg: str):\n    ...\n\n@app.post('/orders')\ndef create_order(tasks: BackgroundTasks):\n    tasks.add_task(write_log, 'order created')",
+    "tags": ["fastapi", "background", "task"]
+  },
+  {
+    "name": "middleware.cors.CORSMiddleware",
+    "full_name": "starlette.middleware.cors.CORSMiddleware",
+    "module": "starlette.middleware.cors",
+    "category": "class",
+    "signature": "CORSMiddleware(app, allow_origins, allow_methods, allow_headers)",
+    "description": "配置跨域访问策略，前后端分离项目常用。",
+    "example": "app.add_middleware(\n    CORSMiddleware,\n    allow_origins=['https://app.example.com'],\n    allow_methods=['*'],\n    allow_headers=['*'],\n)",
+    "tags": ["cors", "middleware", "http"]
+  },
+  {
+    "name": "logging.config.dictConfig",
+    "full_name": "logging.config.dictConfig",
+    "module": "logging.config",
+    "category": "function",
+    "signature": "dictConfig(config)",
+    "description": "用字典配置结构化日志（控制台/文件/JSON）。",
+    "example": "logging.config.dictConfig({\n    'version': 1,\n    'handlers': {'console': {'class': 'logging.StreamHandler'}},\n    'root': {'handlers': ['console'], 'level': 'INFO'}\n})",
+    "tags": ["logging", "config", "observability"]
+  },
+  {
+    "name": "gunicorn",
+    "full_name": "gunicorn",
+    "module": "gunicorn",
+    "category": "cli",
+    "signature": "gunicorn app:app -k uvicorn.workers.UvicornWorker -w 4",
+    "description": "生产环境 WSGI/ASGI 进程管理器，多 worker 提升吞吐。",
+    "example": "gunicorn app.main:app -k uvicorn.workers.UvicornWorker -w 4 -b 0.0.0.0:8000",
+    "tags": ["gunicorn", "deploy", "server"]
+  },
+  {
+    "name": "boto3.client",
+    "full_name": "boto3.client",
+    "module": "boto3",
+    "category": "function",
+    "signature": "boto3.client(service_name, region_name=None)",
+    "description": "创建 AWS 服务低层客户端（S3、SQS、DynamoDB 等）。",
+    "example": "s3 = boto3.client('s3')\ns3.upload_file('local.txt', 'my-bucket', 'remote.txt')",
+    "tags": ["boto3", "aws", "cloud"]
+  },
+  {
+    "name": "pymongo.MongoClient",
+    "full_name": "pymongo.MongoClient",
+    "module": "pymongo",
+    "category": "class",
+    "signature": "MongoClient(host='localhost', port=27017)",
+    "description": "连接 MongoDB，文档型数据库后端常用客户端。",
+    "example": "client = MongoClient('mongodb://localhost:27017')\ndb = client['app']\nusers = db.users.find({'active': True})",
+    "tags": ["mongodb", "database", "nosql"]
+  },
+  {
+    "name": "kafka.KafkaProducer",
+    "full_name": "kafka.KafkaProducer",
+    "module": "kafka",
+    "category": "class",
+    "signature": "KafkaProducer(bootstrap_servers=None)",
+    "description": "向 Kafka 主题发布消息，用于事件驱动架构。",
+    "example": "producer = KafkaProducer(bootstrap_servers='localhost:9092')\nproducer.send('orders', value=b'payload')",
+    "tags": ["kafka", "mq", "event"]
+  },
+  {
+    "name": "aioredis.from_url",
+    "full_name": "redis.asyncio.from_url",
+    "module": "redis.asyncio",
+    "category": "function",
+    "signature": "from_url(url, **kwargs)",
+    "description": "创建异步 Redis 连接，适配 FastAPI 异步路由。",
+    "example": "redis = await redis.asyncio.from_url('redis://localhost:6379/0')\nawait redis.set('k', 'v', ex=60)",
+    "tags": ["redis", "async", "cache"]
+  },
+  {
+    "name": "starlette.responses.JSONResponse",
+    "full_name": "starlette.responses.JSONResponse",
+    "module": "starlette.responses",
+    "category": "class",
+    "signature": "JSONResponse(content, status_code=200)",
+    "description": "返回 JSON HTTP 响应，可自定义状态码与 headers。",
+    "example": "return JSONResponse({'error': 'invalid'}, status_code=400)",
+    "tags": ["starlette", "response", "json"]
+  },
+  {
+    "name": "tenacity.retry",
+    "full_name": "tenacity.retry",
+    "module": "tenacity",
+    "category": "function",
+    "signature": "@retry(stop=stop_after_attempt(3), wait=wait_exponential())",
+    "description": "为外部 API 调用添加指数退避重试，提升稳定性。",
+    "example": "@retry(stop=stop_after_attempt(3), wait=wait_fixed(1))\ndef call_remote():\n    return requests.get(url, timeout=3)",
+    "tags": ["tenacity", "retry", "resilience"]
+  }
+]
