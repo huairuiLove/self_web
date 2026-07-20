@@ -96,12 +96,12 @@ export const posts: Post[] = [
   {
     id: '7',
     slug: 'ai-agent-interview-experience',
-    title: 'AI Agent 面试经验：把“我做过”讲成可验证的工程能力',
-    excerpt: '从自我介绍、项目深挖到系统设计和失败复盘，整理一套能直接用于面试准备的回答框架。',
+    title: '人力资源面试经验：把校园经历讲成真实的工作能力',
+    excerpt: '我把人力资源规划、招聘模拟、社团管理和项目经历重新梳理了一遍，聊聊怎样在面试中真实、清楚地介绍自己的能力。',
     content: marked.parse(interviewExperience, { async: false }),
-    tags: ['AI Agent', '面试经验', '系统设计'],
+    tags: ['人力资源', '面试经验', '校园实践'],
     publishedAt: '2026-07-18',
-    readMinutes: 11,
+    readMinutes: 10,
   },
 ]
 
