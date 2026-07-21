@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>7.20 日报：三个维度思考我与 TTC</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #667085;
+      --soft: #f6f8fb;
+      --paper: #ffffff;
+      --line: #d8dee9;
+      --dark: #111827;
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --green: #16a34a;
+      --green-soft: #dcfce7;
+      --violet: #7c3aed;
+      --violet-soft: #ede9fe;
+      --orange: #ea580c;
+      --orange-soft: #ffedd5;
+      --red: #dc2626;
+      --red-soft: #fee2e2;
+      --teal: #0f766e;
+      --teal-soft: #ccfbf1;
+      --yellow: #a16207;
+      --yellow-soft: #fef3c7;
+      --shadow: 0 16px 48px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 2%, rgba(37, 99, 235, 0.12), transparent 30%),
+        radial-gradient(circle at 92% 3%, rgba(234, 88, 12, 0.12), transparent 28%),
+        linear-gradient(180deg, #fbfdff 0%, var(--soft) 42%, #eef2f7 100%);
+      line-height: 1.72;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-color: rgba(37, 99, 235, 0.45);
+      text-underline-offset: 3px;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    header,
+    section {
+      border: 1px solid rgba(216, 222, 233, 0.9);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    header {
+      padding: 28px;
+      backdrop-filter: blur(12px);
+    }
+
+    section {
+      margin-top: 28px;
+      padding: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 980px;
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    p { margin: 0 0 12px; }
+
+    .lead {
+      max-width: 950px;
+      margin: 18px 0 0;
+      color: #344054;
+      font-size: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 10px 14px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button.primary {
+      color: #fff;
+      background: var(--dark);
+      border-color: var(--dark);
+    }
+
+    .summary-grid,
+    .question-nav,
+    .source-grid,
+    .qa-grid,
+    .framework,
+    .case-grid,
+    .checklist {
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-grid {
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      margin-top: 22px;
+    }
+
+    .question-nav {
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      margin-top: 24px;
+    }
+
+    .source-grid {
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      margin-top: 14px;
+    }
+
+    .qa-grid {
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      margin-top: 14px;
+    }
+
+    .framework {
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      margin: 14px 0;
+    }
+
+    .case-grid {
+      grid-template-columns: repeat(2, minmax(260px, 1fr));
+      margin-top: 14px;
+    }
+
+    .checklist {
+      grid-template-columns: repeat(2, minmax(260px, 1fr));
+      margin-top: 12px;
+    }
+
+    .metric,
+    .nav-card,
+    .source-card,
+    .qa-card,
+    .step,
+    .case,
+    .check {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .metric {
+      min-height: 128px;
+      padding: 16px;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .metric .value {
+      font-weight: 900;
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .metric .note {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-card {
+      display: block;
+      min-height: 170px;
+      padding: 18px;
+      text-decoration: none;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .nav-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 28px rgba(15, 23, 42, 0.10);
+    }
+
+    .nav-card .title {
+      display: block;
+      font-weight: 900;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .nav-card .desc {
+      display: block;
+      margin-top: 12px;
+      color: #344054;
+      font-size: 14px;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .section-number {
+      display: grid;
+      place-items: center;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      color: #fff;
+      background: var(--dark);
+      font-weight: 900;
+    }
+
+    .section-subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .blue { background: var(--blue-soft); border-color: rgba(37, 99, 235, 0.35) !important; }
+    .green { background: var(--green-soft); border-color: rgba(22, 163, 74, 0.35) !important; }
+    .violet { background: var(--violet-soft); border-color: rgba(124, 58, 237, 0.35) !important; }
+    .orange { background: var(--orange-soft); border-color: rgba(234, 88, 12, 0.35) !important; }
+    .red { background: var(--red-soft); border-color: rgba(220, 38, 38, 0.35) !important; }
+    .teal { background: var(--teal-soft); border-color: rgba(15, 118, 110, 0.35) !important; }
+    .yellow { background: var(--yellow-soft); border-color: rgba(161, 98, 7, 0.35) !important; }
+
+    details {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      cursor: pointer;
+      font-weight: 900;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::before {
+      content: "+";
+      display: grid;
+      place-items: center;
+      flex: 0 0 26px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #f2f4f7;
+      color: var(--dark);
+      font-weight: 900;
+    }
+
+    details[open] summary::before {
+      content: "−";
+      background: var(--dark);
+      color: #fff;
+    }
+
+    .detail-body {
+      padding: 0 18px 18px 56px;
+      color: #344054;
+    }
+
+    .detail-body ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .detail-body li { margin: 6px 0; }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      color: #344054;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .flow .node,
+    .step,
+    .source-card,
+    .qa-card,
+    .case {
+      padding: 16px;
+    }
+
+    .flow .node {
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      min-height: 116px;
+    }
+
+    .node b,
+    .step b,
+    .source-card b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--dark);
+    }
+
+    .answer-box {
+      margin: 14px 0;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+    }
+
+    .answer-box strong { color: var(--dark); }
+
+    .quote {
+      margin: 14px 0;
+      padding: 14px 16px;
+      border-left: 5px solid var(--dark);
+      border-radius: 12px;
+      background: #f8fafc;
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: minmax(170px, 0.75fr) 1.15fr 1.15fr;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+
+    .compare > div {
+      padding: 13px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .compare > div:nth-child(3n) { border-right: 0; }
+
+    .compare .head {
+      background: var(--dark);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .case p,
+    .qa-card p,
+    .source-card p,
+    .step p {
+      margin: 0 0 10px;
+      color: #344054;
+    }
+
+    .source {
+      color: #475467;
+      font-size: 13px;
+    }
+
+    .final-answer {
+      margin-top: 14px;
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--dark);
+      color: #fff;
+    }
+
+    .final-answer strong { color: #bfdbfe; }
+
+    .check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 14px;
+    }
+
+    .check input {
+      margin-top: 6px;
+      width: 18px;
+      height: 18px;
+    }
+
+    footer {
+      margin-top: 26px;
+      padding: 18px 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 960px) {
+      .summary-grid,
+      .question-nav,
+      .source-grid,
+      .qa-grid,
+      .framework,
+      .case-grid,
+      .checklist,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .compare { grid-template-columns: 1fr; }
+
+      .compare > div,
+      .compare > div:nth-child(3n) { border-right: 0; }
+
+      .compare .head:not(:first-child) { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 10px;
+      }
+
+      header,
+      section {
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .detail-body { padding-left: 18px; }
+      summary { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">TTC DAILY REVIEW · 2026-07-20</p>
+      <h1>7.20 日报：三个维度思考我与 TTC</h1>
+      <p class="lead">
+        传统行业猎头与 AI 行业猎头的差异 → <strong>行业对比维度</strong><br>
+        TTC 是一家什么样的公司 → <strong>公司认知维度</strong><br>
+        AI 时代的人岗匹配如何实现 → <strong>技术方法维度</strong>
+      </p>
+      <div class="toolbar" aria-label="页面操作">
+        <button class="primary" id="expandAll" type="button">展开全部</button>
+        <button id="collapseAll" type="button">收起全部</button>
+        <button id="goQ1" type="button">问题 1</button>
+        <button id="goQ2" type="button">问题 2</button>
+        <button id="goQ3" type="button">问题 3</button>
+        <button id="goSources" type="button">资料来源</button>
+      </div>
+
+      <div class="summary-grid" aria-label="总览">
+        <div class="metric">
+          <div class="label">主线</div>
+          <div class="value">问题 → 本质 → 资料 → 答案</div>
+          <div class="note">每道题都按同一逻辑展开。</div>
+        </div>
+        <div class="metric">
+          <div class="label">维度一</div>
+          <div class="value">行业对比</div>
+          <div class="note">传统猎头 vs AI 猎头。</div>
+        </div>
+        <div class="metric">
+          <div class="label">维度二</div>
+          <div class="value">公司认知</div>
+          <div class="note">TTC 是什么，靠什么成立。</div>
+        </div>
+        <div class="metric">
+          <div class="label">维度三</div>
+          <div class="value">技术方法</div>
+          <div class="note">AI 时代如何证明匹配。</div>
+        </div>
+      </div>
+
+      <nav class="question-nav" aria-label="三大问题导航">
+        <a class="nav-card blue" href="#q1">
+          <span class="title">1. 传统猎头和 AI 猎头有什么区别？</span>
+          <span class="desc">从行业结构到岗位变化，再到人才梯度与猎头价值回答。</span>
+        </a>
+        <a class="nav-card green" href="#q2">
+          <span class="title">2. TTC 是一家什么样的公司？</span>
+          <span class="desc">从公司主体到融资与产品，再结合组织和实际工作看本质。</span>
+        </a>
+        <a class="nav-card violet" href="#q3">
+          <span class="title">3. AI 时代如何实现人岗匹配？</span>
+          <span class="desc">从 JD 结构化到候选人证据链，再到 AI 匹配与人工验证回答。</span>
+        </a>
+      </nav>
+    </header>
+
+    <section id="logic">
+      <div class="section-head">
+        <div class="section-number">0</div>
+        <div>
+          <h2>总逻辑：这三题其实是一道题</h2>
+          <p class="section-subtitle">这三项问题共同指向 AI 猎头顾问需要具备的底层思维。</p>
+        </div>
+      </div>
+
+      <div class="flow" aria-label="总逻辑流程">
+        <div class="node blue"><b>问题</b>三项看似分散的实习复盘问题。</div>
+        <div class="node green"><b>本质</b>它们分别对应行业对比，公司认知与技术方法。</div>
+        <div class="node orange"><b>资料</b>把公开资料，本地 PDF 与招聘方法论放到合适位置。</div>
+        <div class="node violet"><b>答案</b>形成可用于汇报的结构化答案，并保留案例和判断依据。</div>
+      </div>
+
+      <details open>
+        <summary>三道题真正考察的能力</summary>
+        <div class="detail-body">
+          <p>第一题对应行业理解，重点是看清 AI 行业如何改变人才结构与岗位定义，并进一步改变猎头方法。第二题对应公司认知，重点是把 TTC 放在 AI 人才服务生态里，说明它的业务底座、技术工具与组织扩张方式。第三题对应技术方法，重点是用结构化证据证明候选人与岗位适配，把判断从经验感受推进到可解释且可验证的证据链。</p>
+          <div class="quote">一句话：核心能力是像 AI 猎头一样思考，先理解行业和客户，再定义岗位画像，最后用证据判断人岗匹配。</div>
+        </div>
+      </details>
+    </section>
+
+    <section id="q1">
+      <div class="section-head">
+        <div class="section-number">1</div>
+        <div>
+          <h2>问题一：传统行业猎头和 AI 行业猎头有什么区别？</h2>
+          <p class="section-subtitle">维度：行业对比。关键词包括行业变化，岗位变化，人才梯度变化，以及猎头价值变化。</p>
+        </div>
+      </div>
+
+      <details open>
+        <summary>1.1 问题在问什么</summary>
+        <div class="detail-body">
+          <p>这道题表面上讨论传统行业猎头与 AI 行业猎头的差异，深层关注的是行业高速变化以后，猎头如何从简历搜寻者升级为人才市场判断者。</p>
+          <p>答案可以落到四个点：传统行业岗位边界更清楚，AI 行业岗位常常正在生成；AI 客户之间差异很大，同样属于 AI 公司，技术路线、团队风格和商业模式可能完全不同；传统行业人才梯度更像职级金字塔，AI 行业人才梯度更像能力网络；AI 猎头还要参与岗位定义、机会讲述和能力搭建。</p>
+        </div>
+      </details>
+
+      <details open>
+        <summary>1.2 资料归位：哪些资料支撑这个判断</summary>
+        <div class="detail-body">
+          <div class="source-grid">
+            <article class="source-card blue">
+              <b>WEF Future of Jobs 2025</b>
+              <p>AI 与大数据是增长最快的技能之一，说明企业对 AI 能力的需求已经成为结构性变化。</p>
+              <p class="source">支撑：AI 行业岗位和技能需求快速变化。</p>
+            </article>
+            <article class="source-card green">
+              <b>LinkedIn Future of Recruiting</b>
+              <p>招聘正在走向 AI 辅助和 skills-first，更强调真实能力、项目表现与岗位任务证据。</p>
+              <p class="source">支撑：猎头判断方式变化。</p>
+            </article>
+            <article class="source-card orange">
+              <b>TTC 本地岗位 JD</b>
+              <p>AI 猎头实习生要研究大模型、具身智能、AI Infra 与 AI 应用，并维护公司 Mapping。</p>
+              <p class="source">支撑：TTC 内部已经把行业研究当成岗位职责。</p>
+            </article>
+            <article class="source-card teal">
+              <b>会议内容</b>
+              <p>会议强调，AI 客户的技术路线、团队风格、审美要求和商业模式差异很大，介绍机会的人需要先理解 AI 行业和客户业务。</p>
+              <p class="source">支撑：AI 猎头的门槛从电话筛选升级到行业理解和机会解释。</p>
+            </article>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>1.3 传统行业猎头 vs AI 行业猎头：对比表</summary>
+        <div class="detail-body">
+          <div class="compare" role="table" aria-label="传统行业猎头和 AI 行业猎头对比">
+            <div class="head">维度</div>
+            <div class="head">传统行业猎头</div>
+            <div class="head">AI 行业猎头</div>
+            <div>行业节奏</div>
+            <div>产业结构较成熟，岗位边界与职级体系清楚，薪酬区间相对稳定。</div>
+            <div>技术路线、团队风格和商业模式变化快，岗位定义经常随着业务阶段调整。</div>
+            <div>客户需求</div>
+            <div>核心任务更偏补缺，例如补齐销售总监或财务负责人等关键角色。</div>
+            <div>核心任务更偏建队，例如从 0 到 1 搭建算法、Infra、产品、解决方案与 GTM 团队。</div>
+            <div>人才来源</div>
+            <div>人才来源集中在同行竞品和上下游公司，人才池相对可见。</div>
+            <div>人才来源包括大厂实验室人才、论文作者和开源社区贡献者，也包括创业团队成员与跨行业转型人才。</div>
+            <div>评估标准</div>
+            <div>重点看年限与职级，也看行业资源、公司背书和历史业绩。</div>
+            <div>重点看技术理解、学习速度、商业模式理解、跨职能协作和 AI Native 程度。</div>
+            <div>猎头价值</div>
+            <div>找到合适候选人，并促成入职。</div>
+            <div>还要帮客户解释市场，定义岗位，判断人才稀缺度，并搭建人才梯队。</div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>1.4 人才梯度搭建：从金字塔变成能力网络</summary>
+        <div class="detail-body">
+          <p>传统行业的人才梯度更像金字塔：专员到主管，再到经理、总监和 VP，每一级对应相对稳定的职责与年限。AI 行业的人才梯度更像能力网络，底层技术、产品落地、行业转化与组织扩张会彼此交织。</p>
+          <div class="framework">
+            <div class="step blue"><b>底层技术</b><p>算法与模型训练是基础，数据和评测，以及 MLOps 与 AI Infra 决定系统能否稳定交付。</p></div>
+            <div class="step green"><b>产品落地</b><p>AI 产品经理需要理解 Agent 设计、交互体验与工作流，并能完成场景定义。</p></div>
+            <div class="step orange"><b>行业转化</b><p>解决方案、售前、客户成功和行业专家负责把技术转成客户价值，咨询型 BD 则推动商业机会落地。</p></div>
+            <div class="step violet"><b>组织扩张</b><p>招聘与 HRBP 支撑人才供给，组织发展、创始团队和管理者共同推动团队从早期探索走向规模化。</p></div>
+          </div>
+          <p>所以 AI 猎头需要按能力组合找人。比如一个 AI 解决方案岗位，往往同时需要模型能力理解、客户业务理解、Demo 呈现与项目交付推进能力。</p>
+          <p>会议里还有一个很关键的增量：AI 猎头需要会讲机会故事。对年轻候选人来说，AI 猎头可以被理解为进入 AI 行业的第一张门票，因为这个岗位能接触大量 AI 公司，理解它们的技术路线、岗位结构和人才要求。</p>
+        </div>
+      </details>
+
+      <details open>
+        <summary>1.5 总结汇报</summary>
+        <div class="detail-body">
+          <div class="final-answer">
+            <p><strong>总结汇报：</strong>我理解传统行业猎头和 AI 行业猎头最大的区别，体现在岗位定义、人才判断和机会讲述上。传统行业更成熟，人才梯度通常按职级和年限展开，猎头主要在已知岗位里寻找匹配人选；AI 行业变化更快，很多岗位仍在生成，比如 Agent 产品、AI Infra、具身智能算法和解决方案架构师，因此猎头需要先理解客户正在搭建的能力，再反推出所需人才画像。</p>
+            <p>AI 客户之间的差异也更大，同样叫 AI 公司，背后的技术路线、团队风格、审美要求和商业模式可能完全不同。AI 猎头需要能听懂这些差异，并把机会讲清楚。对年轻候选人来说，AI 猎头的吸引力在于它能成为进入 AI 行业的第一张门票，让候选人接触大量 AI 公司，理解它们在做什么、需要什么岗位、看重什么能力。</p>
+            <p>所以人才梯度也从单一职级序列，扩展为技术、产品、商业化与组织能力交织的能力网络。AI 猎头的价值，是帮助客户理解 AI 人才市场、定义岗位画像，并判断候选人能否解决真实业务问题。</p>
+          </div>
+          <p class="source">案例来源：World Economic Forum《Future of Jobs Report 2025》；LinkedIn《Future of Recruiting》；本地《TTC_AI猎头实习生_岗位JD.pdf》；7.20 会议要点。</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="q2">
+      <div class="section-head">
+        <div class="section-number">2</div>
+        <div>
+          <h2>问题二：TTC 是一家什么样的公司？</h2>
+          <p class="section-subtitle">维度：公司认知。关键词包括公司主体，业务底座，产品方向，融资背景，组织形态和实际工作。</p>
+        </div>
+      </div>
+
+      <details open>
+        <summary>2.1 问题在问什么</summary>
+        <div class="detail-body">
+          <p>这个问题的核心，是理解 TTC 为什么存在，它处在 AI 产业链的哪个位置，以及它和普通招聘平台的差异。</p>
+          <p>好的回答应该同时讲清楚四层：商业底座是猎头交付，服务对象是 AI 与硬科技企业，技术方向是用小麦招聘 / MAI 把招聘流程 AI 化，组织侧还在建设青年人才供给和社区运营能力。</p>
+        </div>
+      </details>
+
+      <details open>
+        <summary>2.2 资料归位：公开资料和本地资料怎么支撑</summary>
+        <div class="detail-body">
+          <div class="source-grid">
+            <article class="source-card blue">
+              <b>官网与 LinkedIn</b>
+              <p>TTC / TTC Advisory / True Talents Connect，主体对应北京才多对信息技术有限公司，方向是 AI-native human capital platform。</p>
+              <p class="source">支撑：公司身份和品牌定位。</p>
+            </article>
+            <article class="source-card green">
+              <b>融资报道</b>
+              <p>源码资本、创新工场、九合创投、厚雪资本和百度战略投资等资料显示，资本关注的是 AI 招聘平台与小麦招聘。</p>
+              <p class="source">支撑：公司主体，融资记录和 HRTech 叙事相互印证。</p>
+            </article>
+            <article class="source-card violet">
+              <b>专利与高新备案</b>
+              <p>Google Patents 收录北京才多对的招聘技术相关专利，高新技术企业备案名单也能看到公司主体。</p>
+              <p class="source">支撑：技术属性主要集中在招聘流程智能化。</p>
+            </article>
+            <article class="source-card orange">
+              <b>本地 PDF</b>
+              <p>JD、电话话术和管理制度显示，一线工作覆盖行业研究、候选人搜寻、电话微信沟通、面试推进和招聘漏斗管理。</p>
+              <p class="source">支撑：真实业务底座仍是猎头交付。</p>
+            </article>
+            <article class="source-card yellow">
+              <b>高校就业系统</b>
+              <p>资料显示 TTC 服务 AI、芯片半导体、新能源、机器人和生物医药等创新企业，中高端人才猎寻特征明显。</p>
+              <p class="source">支撑：它的定位更偏科技行业垂直猎头和中高端人才服务。</p>
+            </article>
+            <article class="source-card teal">
+              <b>小宇宙播客</b>
+              <p>心动的 TTC 体现了公司在 AI 人才内容和品牌社区上的投入。</p>
+              <p class="source">支撑：TTC 有人才生态运营倾向。</p>
+            </article>
+            <article class="source-card blue">
+              <b>会议内容</b>
+              <p>会议把团队定位为人才供应中心：业务团队服务 AI 公司，为客户招聘人才；人才供应团队为业务团队招募 AI 猎头实习生，并通过高校、招聘平台、内容渠道和社群扩展供给。</p>
+              <p class="source">支撑：TTC 的组织能力同时包括外部客户交付和内部人才供给。</p>
+            </article>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>2.3 从资料反推 TTC 的公司模型</summary>
+        <div class="detail-body">
+          <div class="framework">
+            <div class="step blue"><b>服务对象</b><p>服务 AI 与硬科技企业，覆盖机器人、芯片、新能源和生物医药等创新领域。</p></div>
+            <div class="step green"><b>业务底座</b><p>中高端猎头负责人才搜寻、候选人沟通、面试推进和入职转化。</p></div>
+            <div class="step violet"><b>技术方向</b><p>小麦招聘 / MAI 使用 AI Agent 支持岗位理解、人选画像、匹配和沟通提效。</p></div>
+            <div class="step orange"><b>人才供应</b><p>业务团队需要 AI 猎头，人才供应团队负责从高校和实习生渠道筛选更适合的新生代候选人。</p></div>
+            <div class="step yellow"><b>社区运营</b><p>青年人才社区沉淀高校同学和 AI 兴趣人群，通过活动、内容和岗位机会形成长期人才资产。</p></div>
+          </div>
+          <p>因此，TTC 可以概括为 AI 垂直人才服务与 HRTech 公司。AI 是工具和产业入口，猎头交付是现金流和客户关系底座，青年人才供应与社区运营则提升了组织扩张的稳定性。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>2.4 实际案例：小麦招聘与青年人才供应说明什么</summary>
+        <div class="detail-body">
+          <p>公开融资报道把小麦招聘 / MAI 作为重点，Google Patents 也显示北京才多对拥有简历浏览信息生成相关专利。这个案例说明 TTC 的技术方向集中在招聘流程智能化，覆盖岗位理解、候选人画像、简历浏览、推荐理由和沟通记录。</p>
+          <p>这和本地 PDF 能够对应起来：本地资料要求 AI 猎头实习生完成公司 Mapping、候选人沟通、薪资预期理解和推荐判断。小麦招聘的价值，是把这些信息结构化，提升判断效率和交付稳定性。</p>
+          <p>会议要点补充了另一层：TTC 需要稳定招到懂 AI、敢沟通、愿意学习且会使用 AI 工具的新生代猎头实习生。BOSS 直聘、实习平台属于自然流量，小红书、朋友圈、学校社群和私域社群则是内容与渠道运营。这里的新思考是，招聘动作本身也可以成为增长运营案例，标题、海报、文案、发布时间和转化率都能被记录并复盘。</p>
+          <p class="source">案例来源：NACSHR 关于 TTC A 轮融资报道；新浪科技/投中网融资报道；Google Patents 专利 CN118193457B；本地《TTC_AI猎头实习生_岗位JD.pdf》；7.20 会议要点。</p>
+        </div>
+      </details>
+
+      <details open>
+        <summary>2.5 总结汇报</summary>
+        <div class="detail-body">
+          <div class="final-answer">
+            <p><strong>总结汇报：</strong>TTC 是一家 AI 垂直人才服务和 HRTech 公司。它以猎头服务作为业务底座，服务 AI、硬科技、机器人、芯片和新能源等创新企业的人才需求。同时，TTC 通过小麦招聘 / MAI 这样的 AI Agent 产品，把资深猎头对岗位、候选人和匹配逻辑的判断沉淀进系统，提高招聘效率。</p>
+            <p>会议要点让我对 TTC 的组织模型理解更完整：业务团队对外服务 AI 公司，为客户招聘高端人才；人才供应团队对内服务业务团队，为业务团队招募 AI 猎头实习生；青年人才社区则沉淀高校同学和 AI 兴趣人群，形成可持续的人才资产。这样看，TTC 的能力横跨招聘交付、技术、渠道和社区，并持续扩大 AI 人才供给。</p>
+            <p>对客户来说，TTC 提供 AI 行业人才地图、岗位画像、薪酬判断和候选人匹配。对候选人来说，TTC 提供进入 AI 行业的信息入口和职业机会连接。我会把它理解成一家同时具备 AI 赛道猎头交付、AI 招聘工具、青年人才供应和人才生态运营能力的公司。</p>
+          </div>
+          <p class="source">案例来源：TTC 官网；NACSHR/新浪科技融资报道；Google Patents；本地《TTC_完整运营手册.pdf》《TTC_实习生团队_管理制度.pdf》；7.20 会议要点。</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="q3">
+      <div class="section-head">
+        <div class="section-number">3</div>
+        <div>
+          <h2>问题三：AI 时代如何实现人岗匹配，如何证明一个人适合岗位？</h2>
+          <p class="section-subtitle">维度：技术方法。关键词包括岗位结构化，候选人证据链，AI 匹配和人工验证。</p>
+        </div>
+      </div>
+
+      <details open>
+        <summary>3.1 问题在问什么</summary>
+        <div class="detail-body">
+          <p>这题的核心，是如何把候选人与岗位适配这件事，从经验判断推进到可解释、可验证的证据链。</p>
+          <p>在 AI 时代，简历相似度只是起点。会议里提到的水下信息很关键：简历往往是高度压缩的缩略词，电话和面试里的长文本记录能展开候选人的学习速度、理解深度、行动意愿和沟通方式。真正的人岗匹配要先把岗位和候选人结构化，再用 AI 做初筛和解释，最后通过结构化面试、项目证据和业务反馈完成验证。</p>
+        </div>
+      </details>
+
+      <details open>
+        <summary>3.2 资料归位：方法论从哪里来</summary>
+        <div class="detail-body">
+          <div class="source-grid">
+            <article class="source-card blue">
+              <b>OPM Structured Interviews</b>
+              <p>结构化面试强调围绕岗位相关能力，系统询问过去行为或假设情境。</p>
+              <p class="source">支撑：匹配需要标准化评估和岗位相关问题。</p>
+            </article>
+            <article class="source-card green">
+              <b>SHRM Skills-based Hiring</b>
+              <p>技能本位招聘强调作品集、作业、岗位模拟和结构化面试等真实证据。</p>
+              <p class="source">支撑：证明适合要看任务证据。</p>
+            </article>
+            <article class="source-card violet">
+              <b>LinkedIn Future of Recruiting</b>
+              <p>AI 正在帮助招聘从简历筛选走向质量招聘和技能优先。</p>
+              <p class="source">支撑：AI 可以提效，但目标是更高质量的匹配。</p>
+            </article>
+            <article class="source-card orange">
+              <b>TTC 小麦招聘与专利</b>
+              <p>小麦招聘和简历浏览信息生成专利说明 TTC 正在推进招聘判断流程的数据化与智能化。</p>
+              <p class="source">支撑：TTC 的 AI 用在招聘流程中。</p>
+            </article>
+            <article class="source-card yellow">
+              <b>TTC 面试 SOP</b>
+              <p>本地 SOP 围绕 AI 认知、职业动机、沟通能力、学习能力和性格匹配打分。</p>
+              <p class="source">支撑：TTC 内部也在做结构化判断。</p>
+            </article>
+            <article class="source-card teal">
+              <b>TTC 电话话术</b>
+              <p>话术要求记录候选人顾虑、行动意愿、AI 认知和沟通反馈。</p>
+              <p class="source">支撑：候选人匹配还包括动机、地点和薪资等现实约束。</p>
+            </article>
+            <article class="source-card blue">
+              <b>会议内容</b>
+              <p>会议把简历称为压缩信息，强调多轮电话和面试记录可以形成更厚的候选人文本，用来识别学习能力、理解速度、沟通质量和真实动机。</p>
+              <p class="source">支撑：AI 匹配需要利用水下信息，把候选人从静态简历扩展为可分析的证据文本。</p>
+            </article>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>3.3 延伸问题一：TTC 需要什么样的人？</summary>
+        <div class="detail-body">
+          <p>TTC 当前需要的人才可以分成两个层次。业务团队需要能够服务 AI 客户并完成高端人才交付的顾问，人才供应团队需要持续识别和培养具备这类潜力的年轻候选人。结合会议内容、本地岗位 JD 和 TTC 官方招聘页，可以把核心画像概括为四项能力。</p>
+          <div class="framework">
+            <div class="step blue"><b>快速建立行业认知</b><p>面对大模型、具身智能、AI Infra 等新方向，能够主动研究技术路线、公司产品、商业模式和人才分布，并把复杂信息讲清楚。</p></div>
+            <div class="step green"><b>理解人与建立信任</b><p>愿意主动沟通，能够倾听需求、提出有效问题、识别候选人的真实动机，并向候选人准确说明公司和岗位的价值。</p></div>
+            <div class="step violet"><b>独立推进招聘交付</b><p>能够完成客户需求分析、人才 Mapping、定向寻访、面试协调和结果跟进，对目标、过程和交付质量负责。</p></div>
+            <div class="step orange"><b>使用 AI 与数据复盘</b><p>能够用 AI 辅助行业研究、内容生成、简历分析和沟通记录整理，同时关注触达、回复、面试和录用等漏斗数据。</p></div>
+          </div>
+          <p>会议内容将 00 后和高校学生作为当前扩充人才供应的重点人群，也强调对 AI 有兴趣、敢于沟通、愿意学习和会使用 AI 工具。这里可以进一步理解为，年龄和学历主要帮助团队找到高潜力人才池，最终判断仍要回到学习速度、思考质量、沟通表现和任务结果。TTC 官方招聘页也给出了相近要求，包括独立思考、自驱学习、沟通执行、逻辑表达和抗压能力，并要求顾问分析客户需求、制定寻访策略、建立客户档案和行业人才地图。</p>
+          <div class="case-grid">
+            <article class="case blue">
+              <h3>实际案例：TTC 官方招聘画像</h3>
+              <p>TTC 的实习生岗位专业不限，工作内容覆盖客户需求分析、人才寻访、面试推进和行业人才地图。能力要求集中在好奇心、抗压能力、独立思考、自驱学习、沟通执行和文字逻辑。</p>
+              <p><strong>说明：</strong>公司看重的是能否持续理解新行业并推动人才项目落地，专业背景只是初始信息。</p>
+            </article>
+            <article class="case green">
+              <h3>结合会议内容的验证方式</h3>
+              <p>可以让候选人在限定时间内研究一家陌生 AI 公司，输出公司 Mapping、目标人才画像和一段机会介绍，再通过模拟沟通观察其追问质量、理解速度和推进意识。</p>
+              <p><strong>可验证证据：</strong>研究过程、信息来源、输出逻辑、沟通记录，以及候选人根据反馈完成第二版的速度和质量。</p>
+            </article>
+          </div>
+          <div class="final-answer">
+            <p><strong>结论：</strong>TTC 需要的是具备高学习敏感度、AI 行业兴趣、良好沟通能力和强执行力的人。他需要先理解客户的技术与业务，再建立人才画像并完成寻访交付，同时能够使用 AI 工具提高研究、筛选和复盘效率。这类人的成长方向可以概括为 AI 原生的人才顾问。</p>
+          </div>
+          <p class="source">资料来源：<a href="https://www.ttcadvisory.com/joinus">TTC 官方加入我们页面</a>；本地《TTC_AI猎头实习生_岗位JD.pdf》《TTC_AI猎头实习生_面试SOP.pdf》；会议内容。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>3.4 延伸问题二：我们的客户需要什么样的人？</summary>
+        <div class="detail-body">
+          <p>客户需要的人没有统一模板。录音中提到，同样属于 AI 行业，不同公司的技术路线、团队风格、产品审美和商业模式都可能明显不同。因此，客户真正需要的是能够在特定业务阶段解决核心问题，并与现有团队形成有效协作的人。</p>
+          <div class="framework">
+            <div class="step blue"><b>匹配业务目标</b><p>先判断公司正在攻克模型能力、工程效率、产品体验还是商业化问题，再确认候选人是否解决过相似任务。</p></div>
+            <div class="step green"><b>匹配技术路线</b><p>考察候选人的项目是否覆盖客户正在使用的模型、框架、数据、算力和产品路径，并核验其贡献深度。</p></div>
+            <div class="step violet"><b>匹配组织阶段</b><p>早期团队更看重从零到一、跨边界协作和快速试错，规模化团队更看重系统稳定性、工程效率和复杂协同。</p></div>
+            <div class="step orange"><b>匹配团队与动机</b><p>判断候选人的沟通方式、工作节奏、职业目标和现实约束能否适配团队，同时明确仍需验证的风险。</p></div>
+          </div>
+          <div class="case-grid">
+            <article class="case blue">
+              <h3>实际案例：阿里巴巴 AI Infra 工程师</h3>
+              <p>阿里巴巴官方岗位要求候选人参与千卡或万卡 AI 基础设施建设，解决分布式训练、推理加速、GPU 调度和平台化问题。岗位同时看重 Linux 与编程基础、分布式系统知识、主流训练推理框架、跨团队沟通和系统思维。</p>
+              <p><strong>匹配证据：</strong>大规模训练或推理项目、吞吐与延迟指标、GPU 利用率优化结果、开源贡献和复杂系统排障记录。</p>
+            </article>
+            <article class="case green">
+              <h3>实际案例：腾讯大模型推理岗位</h3>
+              <p>腾讯官方 AI Infra 岗位直接围绕高吞吐、低延迟和成本控制展开，要求 C/C++、Python、CUDA、GPU 加速库和 vLLM 等推理框架的实操经验，并关注超大模型分布式部署能力。</p>
+              <p><strong>匹配证据：</strong>候选人需要说明自己优化过什么瓶颈，采用了什么技术方案，并用延迟、吞吐、资源成本和稳定性数据证明结果。</p>
+            </article>
+            <article class="case orange">
+              <h3>岗位画像示例：具身智能</h3>
+              <p>录音提到具身智能大脑和运动控制。此类客户需要进一步区分感知、决策、VLA、世界模型、运动规划和控制等路线，再寻找具有机器人实机、仿真训练或软硬件协同经验的人。</p>
+              <p><strong>匹配证据：</strong>机器人任务成功率、控制稳定性、仿真到实机迁移效果、实时性能和现场问题处理记录。</p>
+            </article>
+            <article class="case violet">
+              <h3>岗位画像示例：AI 产品与解决方案</h3>
+              <p>产品和商业化岗位需要理解模型能力边界，并能把技术转化为用户流程、评测标准和客户价值。候选人的价值要通过真实产品或交付结果呈现。</p>
+              <p><strong>匹配证据：</strong>PRD、Demo、用户访谈、模型评测、项目交付，以及留存、效率、收入或客户采用情况。</p>
+            </article>
+          </div>
+          <p>从这些案例可以看出，客户评价人才时会同时关注专业深度和问题结果。岗位名称只能提供方向，候选人是否做过相似任务、结果是否可量化、能力能否迁移到当前团队，才构成更有说服力的判断。</p>
+          <div class="final-answer">
+            <p><strong>结论：</strong>我们的客户需要能够适配具体技术路线、业务阶段和团队协作方式的人。技术岗位要用项目深度与性能结果证明专业能力，产品和解决方案岗位要用产品落地与客户价值证明转化能力。猎头需要先理解客户当前要解决的问题，再用任务相似度、成果证据、学习迁移和动机约束建立人才画像。</p>
+          </div>
+          <p class="source">案例来源：<a href="https://campus-talent.alibaba.com/campus/position/199903540007">阿里巴巴校园招聘：AI Infra 工程师</a>；<a href="https://careers.tencent.com/jobdesc.html?postId=2037411502792798208">腾讯招聘：微信 AI Infra 工程师，大模型推理方向</a>；会议内容。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>3.5 人岗匹配四步法</summary>
+        <div class="detail-body">
+          <div class="framework">
+            <div class="step blue"><b>1. 定义岗位</b><p>从业务目标拆出任务场景、核心能力、硬门槛和加分项。</p></div>
+            <div class="step green"><b>2. 结构化候选人</b><p>把简历、项目、作品、电话文本、面试记录以及薪资地点偏好转成证据。</p></div>
+            <div class="step violet"><b>3. AI 匹配与解释</b><p>AI 可以把候选人的长文本证据与结构化 JD 匹配，完成技能抽取、候选人排序和推荐理由生成。</p></div>
+            <div class="step orange"><b>4. 人工验证</b><p>用结构化面试、作品或项目测试、背调和试用结果验证判断。</p></div>
+          </div>
+          <p>关键是 AI 的输出要从单一分数升级为可解释判断，说明匹配原因、证据、风险和下一步验证方向。新增的思考是，AI 匹配的质量取决于输入证据的厚度，简历提供轮廓，沟通文本提供细节，项目和面试验证真实性。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>3.6 如何证明候选人与岗位适配</summary>
+        <div class="detail-body">
+          <ul>
+            <li><strong>硬技能证据：</strong>项目、论文、开源代码、产品 Demo、销售案例和解决方案文档。</li>
+            <li><strong>任务相似证据：</strong>候选人过去是否做过和目标岗位类似的真实任务。</li>
+            <li><strong>能力迁移证据：</strong>如果没有同岗位经历，是否有相邻领域的可迁移能力。</li>
+            <li><strong>行为证据：</strong>结构化面试里是否能讲清楚过去如何分析问题、推进协作并拿到结果。</li>
+            <li><strong>水下信息证据：</strong>电话和面试文本里呈现出的理解速度、追问质量、表达清晰度、行动意愿和学习方式。</li>
+            <li><strong>动机和约束：</strong>薪资、地点、行业兴趣、成长目标和稳定性是否和岗位匹配。</li>
+            <li><strong>反证风险：</strong>还缺什么能力，哪些经验没有被验证，入职后需要什么补足机制。</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>3.7 实际案例：不同 AI 岗位的适配证据不同</summary>
+        <div class="detail-body">
+          <div class="case-grid">
+            <article class="case blue">
+              <h3>AI Infra 工程师</h3>
+              <p>核心证据是分布式训练、推理性能优化、模型部署、GPU 成本优化和稳定性排障等真实项目经历。</p>
+              <p><strong>证明方式：</strong>项目复盘、系统设计题、性能指标、代码或架构文档。</p>
+            </article>
+            <article class="case green">
+              <h3>AI 产品经理</h3>
+              <p>核心证据是能否把模型能力转成用户场景、产品流程、评测指标和商业价值。</p>
+              <p><strong>证明方式：</strong>PRD、Demo、用户访谈、增长或留存数据。</p>
+            </article>
+            <article class="case orange">
+              <h3>AI 解决方案岗位</h3>
+              <p>核心证据是客户业务理解、方案设计、Demo 呈现、交付推进和效果复盘。</p>
+              <p><strong>证明方式：</strong>客户案例、售前方案、交付结果和跨团队协作证据。</p>
+            </article>
+            <article class="case violet">
+              <h3>AI 猎头实习生</h3>
+              <p>核心证据是新赛道学习速度、陌生沟通能力、候选人判断能力、内容渠道实验和持续推进能力。</p>
+              <p><strong>证明方式：</strong>AI 认知问答、情景模拟、沟通记录、候选人漏斗结果，以及小红书或私域渠道的标题、海报、文案和转化数据。</p>
+            </article>
+          </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>3.8 总结汇报</summary>
+        <div class="detail-body">
+          <div class="final-answer">
+            <p><strong>总结汇报：</strong>我理解 AI 时代的人岗匹配，需要建立一条可解释的证据链。第一步是把岗位拆清楚，判断这个岗位到底解决什么业务问题，需要哪些任务、能力和场景经验。第二步是把候选人结构化，结合教育背景、项目经历、解决过的问题、使用过的技术和产生过的结果来判断。</p>
+            <p>沿着这个逻辑看，TTC 需要具备高学习敏感度、AI 行业兴趣、沟通能力和交付意识的人。他既要能理解客户的技术与商业模式，也要能完成行业研究、人才 Mapping、候选人沟通和招聘推进，并使用 AI 工具提升研究与复盘效率。录音中提到的年轻高校人才是当前重点人才池，学习速度、思考质量、沟通表现和任务结果构成进一步判断的依据。</p>
+            <p>客户需要的人则由具体业务问题决定。大模型公司可能关注分布式训练、推理性能和算力成本，具身智能公司会进一步区分感知、决策、VLA、运动规划和控制，产品及解决方案团队则关注技术能否形成用户价值和交付结果。因此，猎头要先理解客户的技术路线、组织阶段和团队风格，再判断候选人是否做过相似任务，是否产生过可验证的结果，以及能力能否迁移到新的业务环境。</p>
+            <p>会议要点里提到的水下信息让我有了新的理解：简历只能提供压缩后的候选人轮廓，多轮电话和面试记录能展开一个人的学习速度、理解深度、沟通方式和真实动机。第三步可以用 AI 把这些长文本证据和结构化 JD 做匹配，完成语义匹配、技能抽取、候选人排序和推荐理由生成。第四步由顾问校准能力真实性、团队阶段适配度、动机、薪资和地点约束，再用结构化面试、案例题、作品集、试岗或背调来验证。高质量匹配应该说清楚匹配原因、关键证据和潜在风险。</p>
+          </div>
+          <p class="source">案例来源：U.S. OPM Structured Interviews；SHRM Skills-based hiring；LinkedIn Future of Recruiting；本地《TTC_AI猎头实习生_面试SOP.pdf》；7.20 会议要点。</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="combined-answer">
+      <div class="section-head">
+        <div class="section-number">4</div>
+        <div>
+          <h2>综合总结</h2>
+        </div>
+      </div>
+
+      <details open>
+        <summary>综合总结</summary>
+        <div class="detail-body">
+          <div class="final-answer">
+            <p>传统行业猎头面对相对成熟的岗位和职级体系，主要在稳定人才池里寻找匹配人选；AI 行业变化更快，岗位本身经常还在生成，例如 AI Infra、Agent 产品、具身智能算法和 AI 解决方案。更重要的是，AI 客户之间的技术路线、团队风格和商业模式差异很大，因此 AI 猎头要先理解客户正在搭建什么能力，再定义需要什么样的人，并把机会讲清楚。</p>
+            <p>TTC 就处在这个变化里。它是一家 AI 垂直人才服务和 HRTech 公司，用猎头交付连接 AI 公司和候选人，同时用小麦招聘 / MAI 这样的 AI Agent 产品，把岗位理解、人选画像、推荐理由和招聘流程推进到智能化。会议要点进一步补充了组织侧视角：TTC 还在建设 AI 猎头实习生的人才供应中心，并通过青年人才社区、高校渠道和内容运营沉淀长期人才资产。</p>
+            <p>AI 时代的人岗匹配，核心是建立可解释的证据链。岗位要结构化，候选人也要结构化，简历提供基础轮廓，电话和面试文本提供水下信息，项目与面试验证真实性。AI 可以帮助初筛和生成推荐理由，最终由顾问判断匹配原因、关键证据和潜在风险。我的新增理解是，AI 猎头的竞争力来自三件事：懂行业，能讲清机会，并能把候选人的水下信息转化为可验证的人岗匹配证据。</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <div class="section-number">5</div>
+        <div>
+          <h2>资料来源：按三个问题重新归档</h2>
+          <p class="section-subtitle">同一份资料被放到它最能支撑的问题下面。</p>
+        </div>
+      </div>
+
+      <details open>
+        <summary>问题 1：行业对比资料</summary>
+        <div class="detail-body">
+          <ul>
+            <li><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/">World Economic Forum：Future of Jobs Report 2025。</a></li>
+            <li><a href="https://business.linkedin.com/talent-solutions/resources/future-of-recruiting">LinkedIn：Future of Recruiting 报告资源。</a></li>
+            <li><a href="./TTC_AI猎头实习生_岗位JD.pdf">本地 PDF：TTC_AI猎头实习生_岗位JD.pdf。</a></li>
+            <li><a href="./TTC_电话邀约话术手册.pdf">本地 PDF：TTC_电话邀约话术手册.pdf。</a></li>
+            <li>7.20 会议要点：AI 客户技术路线、团队风格、商业模式和 AI 猎头画像。</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>问题 2：公司认知资料</summary>
+        <div class="detail-body">
+          <ul>
+            <li><a href="https://ttcadvisory.com/">TTC 官网：公司介绍、团队、投资方、小麦招聘。</a></li>
+            <li><a href="https://ttcadvisory.com/newsinfo/5530052.html">TTC 官网：源码资本融资新闻。</a></li>
+            <li><a href="https://ttcadvisory.com/newsinfo/6440936.html">TTC 官网：创新工场 Pre-A 轮融资新闻。</a></li>
+            <li><a href="https://ttcadvisory.com/newsinfo/8133384.html">TTC 官网：九合创投融资新闻。</a></li>
+            <li><a href="https://www.nacshr.org/hrtech/74782.html">NACSHR：AI+猎头模式、千万美元级 A 轮、百度战略投资。</a></li>
+            <li><a href="https://finance.sina.cn/tech/2026-01-29/detail-inhixurx8282775.d.html">新浪科技/投中网：TTC 完成千万美元级新一轮融资。</a></li>
+            <li><a href="https://job.gzus.edu.cn/detail/company?company_id=620222">广州软件学院就业系统：公司简介、领域、规模、人才定位。</a></li>
+            <li><a href="https://m.zhipin.com/companys/f464701ef92b686c1HN839-_FFU~.html">BOSS 直聘：北京才多对信息技术有限公司招聘页。</a></li>
+            <li><a href="https://www.xiaoyuzhoufm.com/podcast/66f2604e69b6a485e881c604">小宇宙：心动的 TTC 播客。</a></li>
+            <li><a href="https://www.bkztfund.com/h-nd-7095.html">北京市 2025 年第四批高新技术企业备案名单转载页。</a></li>
+            <li><a href="./TTC_全套资料摘要.pdf">本地 PDF：TTC_全套资料摘要.pdf。</a></li>
+            <li><a href="./TTC_完整运营手册.pdf">本地 PDF：TTC_完整运营手册.pdf。</a></li>
+            <li><a href="./TTC_实习生团队_管理制度.pdf">本地 PDF：TTC_实习生团队_管理制度.pdf。</a></li>
+            <li>7.20 会议要点：人才供应中心、青年人才社区、招聘渠道和内容运营。</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>问题 3：技术方法资料</summary>
+        <div class="detail-body">
+          <ul>
+            <li><a href="https://www.opm.gov/policy-data-oversight/assessment-and-selection/structured-interviews/">U.S. OPM：Structured Interviews。</a></li>
+            <li><a href="https://www.shrm.org/topics-tools/news/talent-acquisition/5-steps-to-skills-based-hiring">SHRM：Skills-based hiring 方法资料。</a></li>
+            <li><a href="https://business.linkedin.com/talent-solutions/resources/future-of-recruiting">LinkedIn：Future of Recruiting 报告资源。</a></li>
+            <li><a href="https://patents.google.com/patent/CN118193457B/zh">Google Patents：北京才多对相关招聘技术专利。</a></li>
+            <li><a href="https://www.ttcadvisory.com/joinus">TTC 官方：岗位职责、实习生能力要求和组织人才理念。</a></li>
+            <li><a href="https://campus-talent.alibaba.com/campus/position/199903540007">阿里巴巴校园招聘：AI Infra 工程师岗位职责与能力要求。</a></li>
+            <li><a href="https://careers.tencent.com/jobdesc.html?postId=2037411502792798208">腾讯招聘：微信 AI Infra 工程师，大模型推理方向。</a></li>
+            <li><a href="./TTC_AI猎头实习生_面试SOP.pdf">本地 PDF：TTC_AI猎头实习生_面试SOP.pdf。</a></li>
+            <li><a href="./TTC_电话邀约话术手册.pdf">本地 PDF：TTC_电话邀约话术手册.pdf。</a></li>
+            <li>7.20 会议要点：水下信息、多轮沟通文本和结构化 JD 匹配。</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <footer>
+      注：本页基于公开网络资料、当前文件夹 PDF 与 7.20 会议要点整理，仅用于实习学习复盘和公司认知分析。正式入职前，以书面 offer、劳动/实习协议、公司盖章文件为准。
+    </footer>
+  </main>
+
+  <script>
+    const allDetails = Array.from(document.querySelectorAll("details"));
+    document.getElementById("expandAll").addEventListener("click", () => {
+      allDetails.forEach((item) => {
+        item.open = true;
+      });
+    });
+
+    document.getElementById("collapseAll").addEventListener("click", () => {
+      allDetails.forEach((item) => {
+        item.open = false;
+      });
+    });
+
+    const scrollToId = (id) => {
+      document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    document.getElementById("goQ1").addEventListener("click", () => scrollToId("q1"));
+    document.getElementById("goQ2").addEventListener("click", () => scrollToId("q2"));
+    document.getElementById("goQ3").addEventListener("click", () => scrollToId("q3"));
+    document.getElementById("goSources").addEventListener("click", () => scrollToId("sources"));
+  </script>
+</body>
+</html>

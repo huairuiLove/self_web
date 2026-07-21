@@ -10,7 +10,9 @@ const project = computed(() => getProjectById(route.params.id as string))
 <template>
   <div v-if="project" class="page">
     <RouterLink to="/projects" class="back">← 返回项目列表</RouterLink>
-    <div class="banner" :style="{ background: project.gradient }" />
+    <div class="banner" :style="{ background: project.gradient }">
+      <img v-if="project.cover" :src="project.cover" :alt="`${project.title}封面`" />
+    </div>
     <header class="detail-header">
       <p class="meta">{{ project.year }} · {{ project.tags.join(' / ') }}</p>
       <h1 class="title">{{ project.title }}</h1>
@@ -62,7 +64,10 @@ const project = computed(() => getProjectById(route.params.id as string))
   border-radius: 12px;
   margin-bottom: 2rem;
   border: 1px solid var(--border-subtle);
+  overflow: hidden;
 }
+
+.banner img { width: 100%; height: 100%; object-fit: contain; }
 
 .detail-header {
   margin-bottom: 2rem;

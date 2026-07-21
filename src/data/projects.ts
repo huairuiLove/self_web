@@ -1,4 +1,7 @@
 import type { Project } from '../types/content'
+import personalHomepageCover from '../assets/projects/personal-homepage-cover-v2.png'
+import developerToolkitCover from '../assets/projects/developer-toolkit-cover.png'
+import aiTryonCover from '../assets/projects/ai-tryon-cover.png'
 
 export const projects: Project[] = [
   {
@@ -12,6 +15,7 @@ export const projects: Project[] = [
     year: '2026',
     featured: true,
     gradient: 'linear-gradient(135deg, #2d4a3e 0%, #1a2332 50%, #3d2f4a 100%)',
+    cover: personalHomepageCover,
   },
   {
     id: 'toolkit',
@@ -23,6 +27,7 @@ export const projects: Project[] = [
     year: '2025',
     featured: true,
     gradient: 'linear-gradient(135deg, #3a2f1f 0%, #1f2a3a 100%)',
+    cover: developerToolkitCover,
   },
   {
     id: 'experiment',
@@ -34,6 +39,19 @@ export const projects: Project[] = [
     year: '2025',
     featured: false,
     gradient: 'linear-gradient(135deg, #1f3a2f 0%, #2a1f3a 100%)',
+    cover: aiTryonCover,
+  },
+  {
+    id: 'ttc-company-map',
+    title: 'TTC 公司画像交互地图',
+    summary: '基于公开资料和内部 PDF 整理的 TTC 公司研究页，支持折叠词条、案例证据和入职判断清单。',
+    description:
+      '这是一份关于 TTC / True Talents Connect 的交互式公司画像，整合官网、融资报道、招聘平台、专利线索和本地 PDF，帮助快速判断它的公司本质、业务模式、AI 属性和实习岗位真实情况。',
+    tags: ['Research', 'HTML', 'HRTech'],
+    link: '/ttc/index.html',
+    year: '2026',
+    featured: true,
+    gradient: 'linear-gradient(135deg, #1d4ed8 0%, #0f766e 48%, #ea580c 100%)',
   },
 ]
 

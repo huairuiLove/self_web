@@ -10,7 +10,13 @@ defineProps<{
 
 <template>
   <article class="card">
-    <RouterLink :to="`/projects/${project.id}`" class="card-visual" :style="{ background: project.gradient }">
+    <RouterLink
+      :to="`/projects/${project.id}`"
+      class="card-visual"
+      :class="{ 'card-visual--cover': project.cover }"
+      :style="{ background: project.gradient }"
+    >
+      <img v-if="project.cover" class="card-cover" :src="project.cover" :alt="`${project.title}封面`" />
       <span class="card-index">{{ project.id === 'portfolio' ? '01' : project.id === 'toolkit' ? '02' : '03' }}</span>
       <span class="card-year">{{ project.year }}</span>
     </RouterLink>
@@ -71,14 +77,19 @@ defineProps<{
   display: block;
   position: relative;
   aspect-ratio: 16 / 9;
+  background-position: center;
+  background-size: cover;
   text-decoration: none;
   isolation: isolate;
 }
 
 .card-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(8, 10, 19, 0.08), rgba(8, 10, 19, 0.6)); z-index: -1; }
+.card-visual--cover::after { background: transparent; }
+.card-cover { width: 100%; height: 100%; object-fit: contain; }
 
 .card-index {
   position: absolute;
+  z-index: 1;
   top: 0.85rem;
   left: 0.95rem;
   color: rgba(255, 255, 255, 0.78);
@@ -89,6 +100,7 @@ defineProps<{
 
 .card-year {
   position: absolute;
+  z-index: 1;
   bottom: 0.75rem;
   right: 0.85rem;
   font-size: 0.75rem;

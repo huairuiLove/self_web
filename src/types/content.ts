@@ -9,6 +9,7 @@ export interface Project {
   year: string
   featured?: boolean
   gradient: string
+  cover?: string
 }
 
 export interface Post {
