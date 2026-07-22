@@ -2,6 +2,7 @@ import type { Project } from '../types/content'
 import personalHomepageCover from '../assets/projects/personal-homepage-cover-v2.png'
 import developerToolkitCover from '../assets/projects/developer-toolkit-cover.png'
 import aiTryonCover from '../assets/projects/ai-tryon-cover.png'
+import ttcCompanyMapCover from '../assets/projects/ttc-company-map-cover.png'
 
 export const projects: Project[] = [
   {
@@ -52,6 +53,7 @@ export const projects: Project[] = [
     year: '2026',
     featured: true,
     gradient: 'linear-gradient(135deg, #1d4ed8 0%, #0f766e 48%, #ea580c 100%)',
+    cover: ttcCompanyMapCover,
   },
 ]
 

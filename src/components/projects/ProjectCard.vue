@@ -17,7 +17,7 @@ defineProps<{
       :style="{ background: project.gradient }"
     >
       <img v-if="project.cover" class="card-cover" :src="project.cover" :alt="`${project.title}封面`" />
-      <span class="card-index">{{ project.id === 'portfolio' ? '01' : project.id === 'toolkit' ? '02' : '03' }}</span>
+      <span class="card-index">{{ project.id === 'portfolio' ? '01' : project.id === 'toolkit' ? '02' : project.id === 'ttc-company-map' ? '04' : '03' }}</span>
       <span class="card-year">{{ project.year }}</span>
     </RouterLink>
     <div class="card-body">

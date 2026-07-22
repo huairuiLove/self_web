@@ -155,7 +155,13 @@ function clearResume() {
       <p>嗨！好久不见！</p>
     </header>
 
-    <section class="composer" aria-labelledby="composer-title">
+    <nav class="about-subnav" aria-label="关于我内容导航">
+      <a href="#life">生活动态</a>
+      <a href="#internship">实习日报</a>
+      <a href="#resume">我的简历</a>
+    </nav>
+
+    <section id="life" class="composer" aria-labelledby="composer-title">
       <div class="composer-heading">
         <div>
           <p class="eyebrow">NEW MOMENT</p>
@@ -192,7 +198,19 @@ function clearResume() {
       </div>
     </section>
 
-    <section class="resume-section" aria-labelledby="resume-title">
+    <section id="internship" class="internship-section" aria-labelledby="internship-title">
+      <div>
+        <p class="eyebrow">INTERNSHIP DIARY</p>
+        <h2 id="internship-title">实习日报</h2>
+        <p class="internship-lead">记录每天的工作、观察和复盘，把实习中的小事整理成可回看的成长轨迹。</p>
+      </div>
+      <div class="internship-empty">
+        <span class="empty-number">01</span>
+        <p>第一篇实习日报，正在等你写下。</p>
+      </div>
+    </section>
+
+    <section id="resume" class="resume-section" aria-labelledby="resume-title">
       <div class="resume-copy">
         <p class="eyebrow">AVAILABLE FOR DOWNLOAD</p>
         <h2 id="resume-title">我的简历</h2>
@@ -265,6 +283,10 @@ function clearResume() {
 .page-kicker, .eyebrow { margin: 0 0 0.55rem; color: var(--accent-pink); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; }
 .page-header h1 { margin: 0 0 0.75rem; font-family: var(--font-display); font-size: clamp(2.3rem, 6vw, 4.4rem); font-weight: 600; line-height: 1.05; }
 .page-header > p:last-child { margin: 0; color: var(--text-secondary); line-height: 1.8; }
+.about-subnav { position: sticky; top: 0.75rem; z-index: 2; display: flex; width: fit-content; gap: 0.25rem; margin: 0 0 2rem; padding: 0.3rem; border: 1px solid var(--border-subtle); border-radius: 7px; background: color-mix(in srgb, var(--bg-base) 88%, transparent); backdrop-filter: blur(10px); }
+.about-subnav a { padding: 0.42rem 0.7rem; border-radius: 4px; color: var(--text-muted); font-size: 0.78rem; text-decoration: none; transition: color 0.2s ease, background 0.2s ease; }
+.about-subnav a:hover { color: var(--text-primary); background: var(--surface-hover); }
+#life, #internship, #resume { scroll-margin-top: 9rem; }
 .composer { padding: clamp(1rem, 3vw, 1.75rem); border: 1px solid var(--border-subtle); border-radius: 8px; background: color-mix(in srgb, var(--surface-elevated) 82%, transparent); box-shadow: 8px 8px 0 color-mix(in srgb, var(--accent) 12%, transparent); }
 .composer-heading, .composer-actions, .post-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .composer-heading { margin-bottom: 1rem; }
@@ -315,6 +337,11 @@ textarea { display: block; resize: vertical; padding: 1rem 0; line-height: 1.75;
 .photo-grid--2 { grid-template-columns: repeat(2, 1fr); }
 .empty-state { display: flex; min-height: 180px; align-items: center; justify-content: center; gap: 1.25rem; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); color: var(--text-muted); }
 .empty-number { color: var(--accent); font-family: var(--font-display); font-size: 3rem; }
+.internship-section { display: grid; gap: 1.2rem; margin-top: 4rem; padding: clamp(1.1rem, 3vw, 1.75rem) 0; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); scroll-margin-top: 1rem; }
+.internship-section h2 { margin: 0; font-family: var(--font-display); font-size: 1.6rem; }
+.internship-lead { max-width: 38rem; margin: 0.55rem 0 0; color: var(--text-secondary); line-height: 1.75; }
+.internship-empty { display: flex; min-height: 140px; align-items: center; gap: 1.25rem; padding: 1rem; border: 1px dashed var(--border-strong); border-radius: 6px; color: var(--text-muted); background: var(--surface-elevated); }
+.internship-empty p { margin: 0; }
 .resume-section { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem 2rem; align-items: center; margin-top: 4rem; padding: clamp(1.1rem, 3vw, 1.75rem) 0; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
 .resume-copy h2 { margin: 0; font-family: var(--font-display); font-size: 1.6rem; }
 .resume-copy > p:last-child { margin: 0.55rem 0 0; color: var(--text-secondary); line-height: 1.7; }
@@ -330,5 +357,5 @@ textarea { display: block; resize: vertical; padding: 1rem 0; line-height: 1.75;
 .clear-resume { padding: 0.45rem; border: 0; color: var(--text-muted); background: transparent; cursor: pointer; font: inherit; font-size: 0.76rem; }
 .clear-resume:hover { color: var(--accent-pink); }
 .resume-note { grid-column: 1 / -1; margin: 0; }
-@media (max-width: 760px) { .composer-heading { align-items: flex-start; flex-direction: column; } .composer-actions { align-items: flex-start; flex-wrap: wrap; } .image-limit { order: 3; width: 100%; } .preview-grid { grid-template-columns: repeat(2, 1fr); } .photo-grid { grid-template-columns: repeat(2, 1fr); } .resume-section { grid-template-columns: 1fr; } .resume-picker { grid-column: 1; grid-row: auto; width: fit-content; } .resume-file { flex-wrap: wrap; } .download-resume { margin-left: 0; } .life-search { align-items: flex-start; flex-direction: column; } .search-control { width: 100%; } }
+@media (max-width: 760px) { .composer-heading { align-items: flex-start; flex-direction: column; } .composer-actions { align-items: flex-start; flex-wrap: wrap; } .image-limit { order: 3; width: 100%; } .preview-grid { grid-template-columns: repeat(2, 1fr); } .photo-grid { grid-template-columns: repeat(2, 1fr); } .resume-section { grid-template-columns: 1fr; } .resume-picker { grid-column: 1; grid-row: auto; width: fit-content; } .resume-file { flex-wrap: wrap; } .download-resume { margin-left: 0; } .life-search { align-items: flex-start; flex-direction: column; } .search-control { width: 100%; } .about-subnav { width: 100%; justify-content: space-between; } .about-subnav a { flex: 1; padding-inline: 0.35rem; text-align: center; } }
 </style>
